@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	BASE_URL = "https://slack.com"
-	CHAT_URL = "/api/chat.postMessage"
+	SLACK_BASE_URL = "https://slack.com"
+	SLACK_CHAT_URL = "/api/chat.postMessage"
 )
 
 type SlackApi struct {
@@ -19,13 +19,13 @@ type SlackApi struct {
 	HttpClient           *http.Client
 }
 
-func NewSlackApi(token string, user string) *ChatWorkApi {
+func NewSlackApi(token string, user string) *SlackApi {
 	return &SlackApi{Token: token, User: user, HttpClient: http.DefaultClient}
 }
 
 func (c *SlackApi) SendMessage(channelid string, msg string) error {
-	u, _ := url.ParseRequestURI(BASE_URL)
-	u.Path = CHAT_URL
+	u, _ := url.ParseRequestURI(SLACK_BASE_URL)
+	u.Path = SLACK_CHAT_URL
 	reqUrl := fmt.Sprintf("%v", u)
 
 	body := url.Values{}

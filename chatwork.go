@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	BASE_URL = "https://api.chatwork.com"
-	ROOM_URL = "/v1/rooms/%s/messages"
+	CHATWORK_BASE_URL = "https://api.chatwork.com"
+	CHATWORK_ROOM_URL = "/v1/rooms/%s/messages"
 )
 
 type ChatWorkApi struct {
@@ -23,8 +23,8 @@ func NewChatWorkApi(token string) *ChatWorkApi {
 }
 
 func (c *ChatWorkApi) SendMessage(roomid string, msg string) error {
-	u, _ := url.ParseRequestURI(BASE_URL)
-	u.Path = fmt.Sprintf(ROOM_URL, roomid)
+	u, _ := url.ParseRequestURI(CHATWORK_BASE_URL)
+	u.Path = fmt.Sprintf(CHATWORK_ROOM_URL, roomid)
 	reqUrl := fmt.Sprintf("%v", u)
 
 	body := url.Values{}
