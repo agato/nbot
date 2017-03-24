@@ -37,7 +37,7 @@ func (c *SlackApi) SendMessage(channelid string, msg string) error {
 	body.Set("text", msg)
 
 	r, _ := http.NewRequest("POST", reqUrl, bytes.NewBufferString(body.Encode()))
-	//r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	r.Header.Add("Content-Type", "text/plain")
 
 	resp, _ := c.HttpClient.Do(r)
 
