@@ -69,16 +69,13 @@ func (c *SlackApi) SendMessage(channelid string, msg string) error {
 
 func (c *SlackIncomHookApi) SendMessage(channelid string, msg string) error {
 	u, _ := url.ParseRequestURI(fmt.Sprintf(SLACK_INCOM_HOOK_URL, c.T_Param, c.B_Param, c.Token))
-	fmt.Println(u)
-
 	reqUrl := fmt.Sprintf("%v", u)
-
-	fmt.Println(reqUrl)
-
 
 	body := url.Values{}
 	msgJson, _ := json.Marshal(SlackIncomHookMsgJson{channelid, fmt.Sprintf("%s", msg)})
 	body.Set("payload", string(msgJson))
+
+	fmt.Println(body)
 
 	r, _ := http.NewRequest("POST", reqUrl, bytes.NewBufferString(body.Encode()))
 	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
