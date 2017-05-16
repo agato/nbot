@@ -29,8 +29,8 @@ type SlackIncomHookApi struct {
 }
 
 type SlackIncomHookMsgJson struct {
-	Channel   string `json:"text"`
-	Text      string `json:"channel"`
+	Channel   string `json:"channel"`
+	Text      string `json:"text"`
 }
 
 func NewSlackApi(token string, user string) *SlackApi {
@@ -74,8 +74,6 @@ func (c *SlackIncomHookApi) SendMessage(channelid string, msg string) error {
 	body := url.Values{}
 	msgJson, _ := json.Marshal(SlackIncomHookMsgJson{channelid, fmt.Sprintf("%s", msg)})
 	body.Set("payload", string(msgJson))
-
-	fmt.Println(body)
 
 	r, _ := http.NewRequest("POST", reqUrl, bytes.NewBufferString(body.Encode()))
 	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
