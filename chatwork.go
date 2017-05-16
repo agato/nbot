@@ -10,7 +10,7 @@ import (
 
 const (
 	CHATWORK_BASE_URL = "https://api.chatwork.com"
-	CHATWORK_ROOM_URL = "/v1/rooms/%s/messages"
+	CHATWORK_ROOM_URL = "/v2/rooms/%s/messages"
 )
 
 type ChatWorkApi struct {
