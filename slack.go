@@ -72,8 +72,8 @@ func (c *SlackIncomHookApi) SendMessage(channelid string, msg string) error {
 	reqUrl := fmt.Sprintf("%v", u)
 
 	body := url.Values{}
-	json, _ := json.Marshal(SlackIncomHookMsgJson{channelid, fmt.Sprintf("%s", msg)})
-	body.Set("payload", string(json))
+	msgJson, _ := json.Marshal(SlackIncomHookMsgJson{channelid, fmt.Sprintf("%s", msg)})
+	body.Set("payload", string(msgJson))
 
 	r, _ := http.NewRequest("POST", reqUrl, bytes.NewBufferString(body.Encode()))
 	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
