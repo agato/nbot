@@ -22,8 +22,8 @@ type SlackApi struct {
 }
 
 type SlackIncomHookApi struct {
-	T_Param string
-	B_Param string
+	TParam string
+	BParam string
 	Token string
 	HttpClient           *http.Client
 }
@@ -37,8 +37,8 @@ func NewSlackApi(token string, user string) *SlackApi {
 	return &SlackApi{Token: token, User: user, HttpClient: http.DefaultClient}
 }
 
-func NewSlackIncomHookApi(t_param string, b_param string, token string) *SlackIncomHookApi {
-	return &SlackIncomHookApi{T_Param: t_param, B_Param: b_param, Token: token, HttpClient: http.DefaultClient}
+func NewSlackIncomHookApi(tParam string, bParam string, token string) *SlackIncomHookApi {
+	return &SlackIncomHookApi{TParam: tParam, BParam: bParam, Token: token, HttpClient: http.DefaultClient}
 }
 
 func (c *SlackApi) SendMessage(channelid string, msg string) error {
@@ -68,7 +68,7 @@ func (c *SlackApi) SendMessage(channelid string, msg string) error {
 }
 
 func (c *SlackIncomHookApi) SendMessage(channelid string, msg string) error {
-	u, _ := url.ParseRequestURI(fmt.Sprintf(SLACK_INCOM_HOOK_URL, c.T_Param, c.B_Param, c.Token))
+	u, _ := url.ParseRequestURI(fmt.Sprintf(SLACK_INCOM_HOOK_URL, c.TParam, c.BParam, c.Token))
 	reqUrl := fmt.Sprintf("%v", u)
 
 	body := url.Values{}
